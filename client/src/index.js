@@ -4,19 +4,31 @@ import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
+
 import "antd/dist/antd.js";//전역으로 넣어주기
+
+
 import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
 import promiseMiddleware from'redux-promise';
-import reduxThunk from 'redux-thunk';
+import ReduxThunk from 'redux-thunk';
+import { Reducer } from './_reducers';
 
-const creatStoreWithMiddleware = applyMiddleware(promiseMiddleware, reduxThunk)(createStore)
+const creatStoreWithMiddleware = applyMiddleware(promiseMiddleware, ReduxThunk)(createStore)
+//원래는 createstore만 해서 store를 redux에서 생성하는데, 그냥 store는 객체만 못받으니까
+//promise와 function도 함께 받게 하기 위해
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
-<Provider>
+<Provider
+    store={creatStoreWithMiddleware(Reducer,
+      window._REDUX_DEVTOOLS_EXTENSION__&&
+      window._REDUX_DEVTOOLS_EXTENSION__()
+    )}
+>
     <App />
+    
 </Provider>
 
 
