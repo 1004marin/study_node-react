@@ -4,7 +4,7 @@ import axios from 'axios';
 function LandingPage() {
     //landing page에 들어오자마자 아래를 실행
     useEffect(()=> {
-        axios.get('http://localhost:9000/api/users/hello')
+        axios.get('/api/hello')
         .then(response => console.log(response.data))
     },[])
 

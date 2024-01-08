@@ -4,12 +4,22 @@ import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
+import "antd/dist/antd.js";//전역으로 넣어주기
+import { Provider } from 'react-redux';
+import { applyMiddleware, createStore } from 'redux';
+import promiseMiddleware from'redux-promise';
+import reduxThunk from 'redux-thunk';
+
+const creatStoreWithMiddleware = applyMiddleware(promiseMiddleware, reduxThunk)(createStore)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <BrowserRouter>
+
+<Provider>
     <App />
-  </BrowserRouter>
+</Provider>
+
+
   //index.html의 root 안에 보여줄 것이 <app/>라고 정의해둔 것임
 );
 
