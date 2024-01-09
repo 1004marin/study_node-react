@@ -1,7 +1,8 @@
-import { response } from 'express';
+
 import React,{useState} from 'react';
 import Axios from 'axios';
 import {useDispatch} from 'react-redux';
+import { loginUser } from '../../../_actions/user_action';
 
 function LoginPage() {
     const dispatch = useDispatch()
@@ -21,9 +22,15 @@ function LoginPage() {
         
         let body = {
             email: Email,
-            Password: Password
+            password: Password
         }
+        //dispatch: action을 발생시켜주는 함수
         dispatch(loginUser(body))//loginUser라는 action
+        .then(response => {
+            if(response.payload.loginSucess){
+                alert("happy!")
+            }
+        })
 
     }
 
@@ -31,9 +38,10 @@ function LoginPage() {
   return (//form과 button에 모두 submit주는 이유는, and design때매!
     <div style={{height:'100vh', width:'100%', backgroundColor:"pink",
     display:'flex', justifyContent:'center', alignItems:'center'}}
-        onSubmit={onSubmitHandler}>
+        >
         
-        <form style={{display:"flex", flexDirection:"column"}}>
+        <form style={{display:"flex", flexDirection:"column"}}
+        onSubmit={onSubmitHandler}>
             <label>Email</label>
             <input type="email" value={Email} onChange={onEmailHandler}/>
             <label>Password</label>
