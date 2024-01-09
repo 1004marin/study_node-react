@@ -1,0 +1,13 @@
+{
+    "liveSassCompile.settings.autoprefix": [
+        {
+            "format":"expanded",
+            "extensionName": ".css",
+            "savePath": "~/../"
+        }
+    ],
+    "liveSassCompile.settings.generateMap": false, //map 파일 생성 유무
+    "liveSassCompile.settings.includeItems":[
+        "/css/scss/ *.scss"
+    ]
+}
