@@ -13,3 +13,5 @@ export default function (state={}, action) {
             
     }
 }
+//type만 import 해오시면 action은 리덕스 쪽에서 알아서 처리해서 보내줍니다 ^^ 
+//user action을 import하지 않아도 됨

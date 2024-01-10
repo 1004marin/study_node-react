@@ -1,13 +1,18 @@
 
 import React,{useState} from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import Axios from 'axios';
 import {useDispatch} from 'react-redux';
 import { loginUser } from '../../../_actions/user_action';
+
 
 function LoginPage() {
     const dispatch = useDispatch()
     const [Email, setEmail] = useState("")
     const [Password,setPassword] = useState("")
+
+    const navigate = useNavigate();
 
     const onEmailHandler = (e) =>{
         setEmail(e.currentTarget.value)
@@ -28,7 +33,9 @@ function LoginPage() {
         dispatch(loginUser(body))//loginUser라는 action
         .then(response => {
             if(response.payload.loginSucess){
-                alert("happy!")
+                navigate('/')
+            } else{
+                alert('에러에용')
             }
         })
 
