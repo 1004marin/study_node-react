@@ -62,6 +62,7 @@ app.post('/api/users/login', async(req,res) => {
                 res.cookie("amu_name_forCookie", user.token)
                 .status(200)
                 .json({loginSucess: true, userId: user._id})
+                console.log("로그인성공햇어염")
             })
         })
     })
@@ -72,7 +73,7 @@ app.post('/api/users/login', async(req,res) => {
 
 
 //role ->  일반 유저, role 0이 아니면 관리자
-app.get('api/users/auth', auth, (req, res) => {
+app.get('/api/users/auth', auth, (req, res) => {
 
     //auth 미들웨어: 엔드포인트에 요청을 받고 callback func하기 전에 중간 수행
     //여기까지 미들웨어를 통과해왔다 = auth가 true라는 말
@@ -80,13 +81,13 @@ app.get('api/users/auth', auth, (req, res) => {
         _id: req.user._id,
         isAdmin: req.user.role === 0 ? false : true,
         isAuth: true,
-        email:req.user.email,
+        email: req.user.email,
         name: req.user.name,
-        role:req.user.role
+        lastname: req.user.lastname,
+        role: req.user.role,
+        image: req.user.image
         //이외에 user정보 다 리턴하면, 어떤페이지에서든지 유저정보 이용 가능
     })
-    console.log(req.user._id)
-
 })
 
 //로그아웃

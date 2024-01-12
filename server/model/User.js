@@ -5,37 +5,36 @@ const jwt = require('jsonwebtoken');
 
 
 const userSchema = mongoose.Schema({
-    name:{
+    name: {
         type: String,
-        maxLength: 50
-
-    },
-    email:{
-        type:String,
-        trim: true,//스페이스를 없애줌
-        unique: 1//같은 이메일은 못쓰게
-    },
-    password:{
-        type:String,
-        minlength: 5,
-    },
-    lastname:{
-        type:String,
         maxlength: 50
     },
-    role: {//0과1로 관리자인지 유저인지 구분
-        type:Number,
+    email: {
+        type: String,
+        trim: true,
+        unique: 1
+    },
+    password: {
+        type: String,
+        minlength: 5
+    },
+    lastname: {
+        type: String,
+        maxlength: 50
+    },
+    role: {
+        type: Number,
         default: 0
     },
     image: String,
-
-    token: {//유효성관리용 토큰
+    token: {
         type: String
     },
-    tokenExp: {//토큰 사용 기간
-        type:Number
+    tokenExp: {
+        type: Number
     }
-});
+})
+
 
 
 
@@ -81,7 +80,7 @@ userSchema.methods.generateToken = async function(cb){//콜백변수 하나
 
     //jsonwebtoken을 이용해서 token을 생성하기
     //user._id + this~를 토큰에 넣어주고, 토큰에서 this~로 user._id판별 => 'this~'도 기억해야함
-    var token = jwt.sign(user._id.toHexString(), 'thisIstyoken')
+    var token = jwt.sign(user._id.toHexString(), 'thisIsToken')
     user.token = token;
 
 
@@ -118,20 +117,23 @@ userSchema.statics.findByToken = function (token, cb) {
     var user = this;
 
     //토큰을 decode한다.
-    jwt.verify(token, 'thisIstyoken', function(err, decoded){
+    jwt.verify(token, 'thisIsToken', function(err, decoded){
         //decoded는 user._id
         // 유저 아이디를 이용해서 유저를 찾은 다음에
         // 클라이언트에서 가져온 token과 DB에 보관된 토큰이 일치하는지 확인
-
+        
         user.findOne({"_id": decoded, "token": token})
         .then((user) => {
             cb(null, user);
+            console.log(user);
         })
         .catch((err) => {
             return cb(err);
         })
         
+
     })
+    
 }
 
 
