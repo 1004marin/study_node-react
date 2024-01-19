@@ -1,5 +1,5 @@
 import axios from "axios";
-import { LOGIN_USER, REGISTER_USER, CHECK_EMAIL_USER, CHECK_USERNAME_USER, AUTH_USER } from "./types"
+import { LOGIN_USER, REGISTER_USER, AUTH_USER } from "./types"
 
 
 //redux 사용 안할 시 axios..이하는 loginPage에서!
@@ -17,6 +17,7 @@ export function loginUser(dataTosubmit){
     }
     
 }
+/*
 export function checkEmailUser(dataTosubmit){
     
     const request = axios.post('/join', dataTosubmit)
@@ -37,6 +38,7 @@ export function checkUsernameUser(dataTosubmit){
     }
     
 }
+*/
 export function registerUser(dataTosubmit){
     
     const request = axios.post('/join', dataTosubmit)

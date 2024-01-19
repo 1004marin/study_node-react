@@ -1,4 +1,6 @@
-import {LOGIN_USER, REGISTER_USER, AUTH_USER} from '../_actions/types';
+import 
+{LOGIN_USER, REGISTER_USER, CHECK_EMAIL_USER,CHECK_USERNAME_USER ,AUTH_USER} 
+from '../_actions/types';
 
 //prevState + action을 가졌으니, nextState 돌려주기
 export default function (state={}, action) {
